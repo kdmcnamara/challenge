@@ -1,0 +1,29 @@
+{
+  "name": "penrodjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node src/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@salesforce-ux/design-system": "^2.7.5",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.9"
+  },
+  "devDependencies": {
+    "angular": "^1.7.5",
+    "angular-mocks": "^1.7.5",
+    "angular-ui-router": "^1.0.20",
+    "chai": "^4.2.0",
+    "jasmine-core": "^3.3.0",
+    "jsdom": "^13.1.0",
+    "karma": "^3.1.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^2.0.1",
+    "mocha": "^5.2.0"
+  }
+}

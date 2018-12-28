@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Playground</title>
+    <link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+  <!-- ng-app for AngularJS -->
+  <body ng-app="weatherApp" ng-controller="mainCtrl">
+    <!-- wrapper -->
+    <div class="slds-grid slds-wrap">
+      <!-- header -->
+      <div class="slds-page-header">
+        <div class="slds-page-header__row">
+          <div class="slds-page-header__col-title">
+            <div class="slds-media">
+              <div class="slds-media__body">
+                <div class="slds-page-header__name">
+                  <div class="slds-page-header__name-title">
+                    <h1>
+                      <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">Weather Tracker • Penrod Offices</span>
+                    </h1>
+                  </div>
+                </div>
+                <p class="slds-page-header__name-meta">Get weather updates at Penrod's office locations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- tabbed option to select weather function -->
+      <!-- use ng-show for showing tab based on click condition -->
+      <!-- getWeather and getUpcomingWeather are AngularJS controller functions that pull weather data from the API and make it available through scope variables -->
+      <div class="slds-tabs_default">
+        <ul class="slds-tabs_default__nav" role="tablist" ng-init="Milwaukee = false; Chicago = false; Minneapolis = false; Dallas = false">
+          <li class="slds-tabs_default__item" title="Item One" role="presentation" ng-click="Milwaukee = true; Chicago = false; Dallas = false; Minneapolis = false; address = 'https://api.openweathermap.org/data/2.5/weather?zip=53217,us&APPID=659b1a6eb7e1ed50a983801b2101a81c'; getWeather(); upcomingAddress='https://api.openweathermap.org/data/2.5/forecast?q=Milwaukee,us&APPID=659b1a6eb7e1ed50a983801b2101a81c'; getUpcomingWeather()">
+            <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Milwaukee</a>
+          </li>
+          <li class="slds-tabs_default__item" title="Item Two" role="presentation" ng-click="Milwaukee = false; Chicago = false; Dallas = false; Minneapolis = true; address = 'https://api.openweathermap.org/data/2.5/weather?zip=55414,us&APPID=659b1a6eb7e1ed50a983801b2101a81c'; getWeather(); upcomingAddress='https://api.openweathermap.org/data/2.5/forecast?q=Minneapolis,us&APPID=659b1a6eb7e1ed50a983801b2101a81c'; getUpcomingWeather()">
+            <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Minneapolis</a>
+          </li>
+          <li class="slds-tabs_default__item" title="Item Three" role="presentation" ng-click="Milwaukee = false; Chicago = true; Dallas = false; Minneapolis = false; address = 'https://api.openweathermap.org/data/2.5/weather?zip=60666,us&APPID=659b1a6eb7e1ed50a983801b2101a81c'; getWeather(); upcomingAddress='https://api.openweathermap.org/data/2.5/forecast?q=Chicago,us&APPID=659b1a6eb7e1ed50a983801b2101a81c'; getUpcomingWeather()">
+            <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item">Chicago</a>
+          </li>
+          <li class="slds-tabs_default__item" title="Item Three" role="presentation" ng-click="Milwaukee = false; Chicago = false; Dallas = true; Minneapolis = false; address = 'https://api.openweathermap.org/data/2.5/weather?zip=75202,us&APPID=659b1a6eb7e1ed50a983801b2101a81c'; getWeather(); upcomingAddress='https://api.openweathermap.org/data/2.5/forecast?q=Dallas,us&APPID=659b1a6eb7e1ed50a983801b2101a81c'; getUpcomingWeather()">
+            <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item">Dallas</a>
+          </li>
+        </ul>
+        <!-- <div id="tab-default-1" class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-1__item" ng-show="Milwaukee">Temperature: {{weatherData.main.temp}}</div> -->
+        <div class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-1__item" ng-show="Milwaukee">
+          <h1>Current Weather in Milwaukee</h1>
+        </div>
+          <!-- ng-repeat loops through AngularJS scope variable -->
+          <div class="slds_tabs_default" role="tabpanel" aria-labelledby="tab-default-1__item" ng-repeat="weather in weathers" ng-show="Milwaukee">
+            <p>Temperature: {{weather.Temp}}</p>
+            <p>Description: {{weather.Description}}</p>
+          </div>
+          <div class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-1__item" ng-show="Milwaukee">
+            <h1>Upcoming Weather in Milwaukee</h1>
+          </div>
+          <div class="slds_tabs_default" role="tabpanel" aria-labelledby="tab-default-1__item" ng-repeat="time in upcomingTimes" ng-show="Milwaukee">
+            <h1>{{time}}</h1>
+            <p>Temperature: {{upcomingTemp}}</p>
+            <p>Description {{upcomingDescription}}</p>
+          </div>
+        <div class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-2__item" ng-show="Minneapolis">
+          <h1>Current Weather in Minneapolis</h1>
+        </div>
+        <div class="slds_tabs_default" role="tabpanel" aria-labelledby="tab-default-2__item" ng-repeat="weather in weathers"ng-show="Minneapolis">
+          <p>Temp: {{weather.Temp}}</p>
+          <p>Description: {{weather.Description}}</p>
+        </div>
+        <div class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-1__item" ng-show="Minneapolis">
+          <h1>Upcoming Weather in Minneapolis</h1>
+        </div>
+        <div class="slds_tabs_default" role="tabpanel" aria-labelledby="tab-default-1__item" ng-repeat="time in upcomingTimes" ng-show="Minneapolis">
+          <h1>{{time}}</h1>
+          <p>Temperature: {{upcomingTemp}}</p>
+          <p>Description {{upcomingDescription}}</p>
+        </div>
+        <div class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-3__item" ng-show="Chicago">
+          <h1>Weather in Chicago</h1>
+        </div>
+        <div class="slds_tabs_default" role="tabpanel" aria-labelledby="tab-default-3__item" ng-repeat="weather in weathers" ng-show="Chicago">
+          <p>Temp: {{weather.Temp}}</p>
+          <p>Description: {{weather.Description}}</p>
+        </div>
+        <div class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-1__item" ng-show="Chicago">
+          <h1>Upcoming Weather in Chicago</h1>
+        </div>
+        <div class="slds_tabs_default" role="tabpanel" aria-labelledby="tab-default-1__item" ng-repeat="time in upcomingTimes" ng-show="Chicago">
+          <h1>{{time}}</h1>
+          <p>Temperature: {{upcomingTemp}}</p>
+          <p>Description {{upcomingDescription}}</p>
+        </div>
+        <div class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-3__item" ng-show="Dallas">
+          <h1>Weather in Dallas</h1>
+        </div>
+        <div class="slds_tabs_default" role="tabpanel" aria-labelledby="tab-default-4__item" ng-repeat="weather in weathers" ng-show="Dallas">
+          <p>Temp: {{weather.Temp}}</p>
+          <p>Description: {{weather.Description}}</p>
+        </div>
+        <div class="slds-tabs_default__content" role="tabpanel" aria-labelledby="tab-default-1__item" ng-show="Dallas">
+          <h1>Upcoming Weather in Dallas</h1>
+        </div>
+        <div class="slds_tabs_default" role="tabpanel" aria-labelledby="tab-default-1__item" ng-repeat="time in upcomingTimes" ng-show="Dallas">
+          <h1>{{time}}</h1>
+          <p>Temperature: {{upcomingTemp}}</p>
+          <p>Description {{upcomingDescription}}</p>
+        </div>
+      </div>
+
+    </div>
+    <div id="root"></div>
+    <!-- links to AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="./scripts/app.js" type="text/javascript"></script>
+    <script src="./scripts/controllers/main.js" type="text/javascript"></script> <!-- after app.js -->
+    <script src="./scripts/services/data.js" type="text/javascript"></script>
+  </body>
+</html>
