@@ -1,6 +1,14 @@
 Penrod Weather Tracker
 Find weather of cities in which Penrod offices are located.
 
+This project uses the following technologies:
+Node.js
+AngularJS
+html
+css
+Lightning Design System
+Jasmine/ Karma
+
 How to get the application working:
 Install node, npm
 At the root directory for the project, run:
